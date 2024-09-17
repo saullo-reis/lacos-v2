@@ -8,6 +8,7 @@ import (
 	"github.com/joho/godotenv"
 	"lacosv2.com/src/database/migrations"
 	"lacosv2.com/src/handlers/auth"
+	"lacosv2.com/src/handlers/user"
 )
 
 func init() {
@@ -27,8 +28,15 @@ func main() {
 			"message": "pong",
 		})
 	})
+
+	//AUTH
 	r.POST("/login", auth.Login)
 	r.POST("/register", auth.AuthMiddlewareAdmin(), auth.Register)
 
+	//USERS
+	r.DELETE("/user/delete/:idUser", auth.AuthMiddlewareAdmin(), user.DeleteUser)
+	r.GET("/user/get", auth.AuthMiddlewareAdmin(), user.GetAllUsers)
+	r.GET("/user/get/:idUser", auth.AuthMiddlewareAdmin(), user.GetOneUser)
+	r.PATCH("/user/update/:idUser", auth.AuthMiddlewareAdmin(), user.UpdateUser)
 	r.Run()
 }
