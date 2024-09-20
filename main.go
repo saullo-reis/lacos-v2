@@ -8,6 +8,7 @@ import (
 	"github.com/joho/godotenv"
 	"lacosv2.com/src/database/migrations"
 	"lacosv2.com/src/handlers/auth"
+	"lacosv2.com/src/handlers/persons"
 	"lacosv2.com/src/handlers/user"
 )
 
@@ -38,5 +39,8 @@ func main() {
 	r.GET("/user/get", auth.AuthMiddlewareAdmin(), user.GetAllUsers)
 	r.GET("/user/get/:idUser", auth.AuthMiddlewareAdmin(), user.GetOneUser)
 	r.PATCH("/user/update/:idUser", auth.AuthMiddlewareAdmin(), user.UpdateUser)
+
+	//PERSONS
+	r.POST("/persons/create", auth.AuthMiddleware(), persons.CreatePerson)
 	r.Run()
 }
