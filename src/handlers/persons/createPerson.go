@@ -6,6 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	database "lacosv2.com/src/database/config"
+	stct "lacosv2.com/src/handlers/persons/struct"
 )
 
 type fieldsMandatories struct {
@@ -32,7 +33,7 @@ func verifyMandatoryField(fields []string) (string, bool) {
 }
 
 func CreatePerson(c *gin.Context) {
-	var payloadToCreatePerson PersonJSON
+	var payloadToCreatePerson stct.PersonJSON
 	if err := c.ShouldBindJSON(&payloadToCreatePerson); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"status":  400,
@@ -88,7 +89,7 @@ func CreatePerson(c *gin.Context) {
 		return
 	}
 
-	if payloadToCreatePerson.ResponsiblePerson == (ResponsiblePersonJSON{}) {
+	if payloadToCreatePerson.ResponsiblePerson == (stct.ResponsiblePersonJSON{}) {
 		c.JSON(http.StatusOK, gin.H{
 			"status_code": 200,
 			"message":     "Pessoa inserida",

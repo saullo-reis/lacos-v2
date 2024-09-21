@@ -6,6 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	database "lacosv2.com/src/database/config"
+	stct "lacosv2.com/src/handlers/user/struct"
 )
 
 func GetOneUser(c *gin.Context){
@@ -21,7 +22,7 @@ func GetOneUser(c *gin.Context){
 	}
 	defer db.Close()
 
-	var User Users
+	var User stct.Users
 	row := db.QueryRow("SELECT id_user, username FROM users WHERE id_user = $1", idUser)
 	err = row.Scan(&User.Id_user, &User.Username)
 	if err != nil {

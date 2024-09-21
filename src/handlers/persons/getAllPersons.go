@@ -6,6 +6,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 	database "lacosv2.com/src/database/config"
+	stct "lacosv2.com/src/handlers/persons/struct"
+	funcs "lacosv2.com/src/handlers/persons/funcs"
 )
 
 func addingLimit(limit string) string {
@@ -56,9 +58,9 @@ func GetAllPersons(c *gin.Context){
 	}
 	defer rows.Close()
 
-	var response []Response
+	var response []stct.Response
 	for rows.Next() {
-		var searchPerson SearchFieldsPerson
+		var searchPerson stct.SearchFieldsPerson
 		err = rows.Scan(&searchPerson.IDPerson, &searchPerson.Name, &searchPerson.BirthDate, &searchPerson.RG, &searchPerson.CPF, &searchPerson.CadUnico, &searchPerson.NIS, &searchPerson.School, &searchPerson.Address, &searchPerson.AddressNumber, &searchPerson.BloodType, &searchPerson.Neighborhood, &searchPerson.City, &searchPerson.CEP, &searchPerson.HomePhone , &searchPerson.CellPhone, &searchPerson.ContactPhone, &searchPerson.Email, &searchPerson.CurrentAge, &searchPerson.Active, &searchPerson.ResponsiblePerson.IDResponsible, &searchPerson.ResponsiblePerson.Name, &searchPerson.ResponsiblePerson.Relationship, &searchPerson.ResponsiblePerson.RG, &searchPerson.ResponsiblePerson.CPF, &searchPerson.ResponsiblePerson.CellPhone)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{
@@ -68,7 +70,7 @@ func GetAllPersons(c *gin.Context){
 			return
 		}
 
-		response = append(response, creatingResponse(searchPerson))
+		response = append(response, funcs.CreatingResponse(searchPerson))
 	}
 
 	c.JSON(http.StatusOK, gin.H{

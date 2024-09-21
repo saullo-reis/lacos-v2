@@ -6,6 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	database "lacosv2.com/src/database/config"
+	stct "lacosv2.com/src/handlers/user/struct"
 )
 
 func addingLimit(limit string) string {
@@ -46,7 +47,7 @@ func GetAllUsers(c *gin.Context) {
 	}
 	defer db.Close()
 
-	var response []Users
+	var response []stct.Users
 	rows, err := db.Query(query)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
@@ -58,7 +59,7 @@ func GetAllUsers(c *gin.Context) {
 	defer rows.Close()
 
 	for rows.Next() {
-		var oneRowScan Users
+		var oneRowScan stct.Users
 		rows.Scan(&oneRowScan.Id_user, &oneRowScan.Username)
 		response = append(response, oneRowScan)
 	}

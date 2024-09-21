@@ -1,7 +1,9 @@
 package persons
 
-func creatingResponse(person SearchFieldsPerson) Response{
-	responseResponsible := ResponseResponsiblePerson{
+import stct "lacosv2.com/src/handlers/persons/struct"
+
+func CreatingResponse(person stct.SearchFieldsPerson) stct.Response{
+	responseResponsible := stct.ResponseResponsiblePerson{
 		IDPerson: person.ResponsiblePerson.IDPerson.Int64,
 		IDResponsible: person.ResponsiblePerson.IDResponsible.Int64,
 		Name: person.ResponsiblePerson.Name.String,
@@ -11,7 +13,7 @@ func creatingResponse(person SearchFieldsPerson) Response{
 		CellPhone: person.ResponsiblePerson.CellPhone.String,
 	}
 
-	responsePerson := Response{
+	responsePerson := stct.Response{
 		IDPerson: person.IDPerson.Int64,
 		Name: person.Name.String,
 		BirthDate: person.BirthDate.String,

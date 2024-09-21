@@ -6,6 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	database "lacosv2.com/src/database/config"
+	stct "lacosv2.com/src/handlers/auth/struct"
 )
 
 func Register(c *gin.Context){
@@ -19,7 +20,7 @@ func Register(c *gin.Context){
 	}
 	defer db.Close()
 
-	var user payload
+	var user stct.Payload
 	if err := c.ShouldBindJSON(&user); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"status_code": 400,

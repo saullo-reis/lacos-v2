@@ -5,6 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	database "lacosv2.com/src/database/config"
+	stct "lacosv2.com/src/handlers/auth/struct"
 )
 
 
@@ -20,7 +21,7 @@ func Login(c *gin.Context){
 	}
 	defer db.Close()
 
-	var body payload
+	var body stct.Payload
 	if err = c.ShouldBindJSON(&body);err !=nil{
 		c.JSON(http.StatusBadRequest, gin.H{
 			"status_code": 400,
@@ -30,7 +31,7 @@ func Login(c *gin.Context){
 	}
 	passwordHashed := HasherPassword(body.Password)
 
-	var userQueried User
+	var userQueried stct.User
 	rows, err := db.Query("SELECT username, password FROM users WHERE username = $1", body.Username)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -50,7 +51,7 @@ func Login(c *gin.Context){
 			})
 			return
 		}
-		userQueried = User{
+		userQueried = stct.User{
 			Username: username,
 			Password: password,
 		}

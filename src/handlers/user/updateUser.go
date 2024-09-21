@@ -9,11 +9,12 @@ import (
 	"github.com/gin-gonic/gin"
 	database "lacosv2.com/src/database/config"
 	"lacosv2.com/src/handlers/auth"
+	stct "lacosv2.com/src/handlers/user/struct"
 )
 
 func UpdateUser(c *gin.Context) {
 	id_user := c.Param("idUser")
-	var body UpdateUsers
+	var body stct.UpdateUsers
 	if err := c.ShouldBindJSON(&body); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"status":  400,
