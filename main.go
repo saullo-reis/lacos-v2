@@ -43,5 +43,6 @@ func main() {
 	//PERSONS
 	r.POST("/persons/create", auth.AuthMiddleware(), persons.CreatePerson)
 	r.GET("/persons/get/:idUser", auth.AuthMiddleware(), persons.GetOnePerson)
+	r.GET("/persons/get", auth.AuthMiddleware(), persons.GetAllPersons)
 	r.Run()
 }
