@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"lacosv2.com/src/database/migrations"
+	activity "lacosv2.com/src/handlers/activities"
 	"lacosv2.com/src/handlers/auth"
 	"lacosv2.com/src/handlers/persons"
 	"lacosv2.com/src/handlers/user"
@@ -44,5 +45,13 @@ func main() {
 	r.POST("/persons/create", auth.AuthMiddleware(), persons.CreatePerson)
 	r.GET("/persons/get/:idUser", auth.AuthMiddleware(), persons.GetOnePerson)
 	r.GET("/persons/get", auth.AuthMiddleware(), persons.GetAllPersons)
+	r.PATCH("/persons/update", auth.AuthMiddleware(), persons.UpdatePersons)
+	r.DELETE("/persons/delete/:idPerson", auth.AuthMiddleware(), persons.DeletePerson)
+	r.POST("/persons/active/:idPerson", auth.AuthMiddleware(), persons.ActivePerson)
+
+	//ACTIVITIES
+	r.POST("/activity/create", auth.AuthMiddleware(), activity.CreateActivity)
+	r.DELETE("/activity/delete/:idActivity", auth.AuthMiddleware(), activity.DeleteActivity)
+
 	r.Run()
 }
