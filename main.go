@@ -50,8 +50,11 @@ func main() {
 	r.POST("/persons/active/:idPerson", auth.AuthMiddleware(), persons.ActivePerson)
 
 	//ACTIVITIES
-	r.POST("/activity/create", auth.AuthMiddleware(), activity.CreateActivity)
-	r.DELETE("/activity/delete/:idActivity", auth.AuthMiddleware(), activity.DeleteActivity)
-
+	r.POST("/activityList/create", auth.AuthMiddleware(), activity.CreateActivity)
+	r.DELETE("/activityList/delete/:idActivity", auth.AuthMiddleware(), activity.DeleteActivity)
+	r.GET("/activityList/get/:idActivity", auth.AuthMiddleware(), activity.GetOneActivity)
+	r.GET("/activityList/get", auth.AuthMiddleware(), activity.GetAllActivities)
+	r.POST("/activities/action/link", auth.AuthMiddleware(), activity.LinkActivity)
+	r.DELETE("/activities/action/link/delete/:idActivities", auth.AuthMiddleware(), activity.DeleteLink)
 	r.Run()
 }
