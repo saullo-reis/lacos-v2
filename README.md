@@ -1,154 +1,72 @@
+# Como iniciar
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API Documentation</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-        }
-        h1, h2, h3 {
-            color: #333;
-        }
-        .container {
-            max-width: 900px;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        pre {
-            background: #333;
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            overflow-x: auto;
-        }
-        code {
-            color: #c7254e;
-            background-color: #f9f2f4;
-            padding: 2px 4px;
-            border-radius: 4px;
-            font-size: 90%;
-        }
-        .section {
-            margin-bottom: 30px;
-        }
-        ul {
-            margin: 10px 0;
-            padding-left: 20px;
-        }
-        li {
-            margin-bottom: 10px;
-        }
-        .endpoint {
-            font-weight: bold;
-            color: #007BFF;
-        }
-        .note {
-            color: #555;
-            font-style: italic;
-        }
-    </style>
-</head>
-<body>
+Configure os .env que quiser ou se preferir apenas retire o "_sample" do .env que vai funcionar também.
 
-<div class="container">
+Necessita de ter o docker e o docker-compose baixado em sua máquina.
 
-    <h1>API Documentation</h1>
+## Comando para iniciar e desativar
 
-    <div class="section">
-        <h2>Guia de Início</h2>
-
-        <h3>Configuração</h3>
-        <ul>
-            <li>Configure o arquivo <code>.env</code> conforme necessário, ou renomeie o arquivo <code>.env_sample</code> para <code>.env</code> para usar as configurações padrão.</li>
-            <li>Certifique-se de ter o Docker e o Docker Compose instalados na sua máquina.</li>
-        </ul>
-
-        <h3>Executando a Aplicação</h3>
-        <p>Comandos para iniciar e parar o servidor:</p>
-        <ul>
-            <li><strong>Iniciar o servidor:</strong></li>
-            <pre><code>docker-compose up --build</code></pre>
-
-            <li><strong>Parar o servidor:</strong></li>
-            <pre><code>docker-compose down</code></pre>
-        </ul>
-
-        <h3>Verificação</h3>
-        <p>Faça uma requisição GET para <code>http://localhost:8080/ping</code>. A resposta esperada é:</p>
-        <pre><code>{
+- docker-compose up --build
+- docker-compose down
+Faça uma requisição para o http://localhost:8080/ping se retornar:
+{
     "message": "pong",
     "status": 200
-}</code></pre>
-        <p class="note">Se essa resposta for retornada, a API está pronta para uso.</p>
-    </div>
+}
 
-    <div class="section">
-        <h2>APIs Disponíveis</h2>
+Está tudo certo e já pode utilizar a API
 
-        <h3>Sistema de Busca</h3>
-        <p>A API suporta os seguintes parâmetros para busca:</p>
-        <ul>
-            <li><strong>q:</strong> Condição para a consulta, por exemplo: <code>name='Saullo'</code>.</li>
-            <li><strong>limit:</strong> Limita o número de registros retornados, por exemplo, <code>limit=10</code>.</li>
-            <li><strong>offset:</strong> Define o número de registros a pular, por exemplo, <code>offset=5</code>.</li>
-        </ul>
-    </div>
+# APIs
 
-    <div class="section">
-        <h2>Autenticação e Gerenciamento de Usuários</h2>
+## SISTEMA DE BUSCAS COMANDOS ADICIONAIS
 
-        <h3><span class="endpoint">/login</span> (POST)</h3>
-        <p>Realiza login com um usuário administrador.</p>
-        <p><strong>Body:</strong></p>
-        <pre><code>{
+q = Você consegue escrever uma condição para a query que será feita por exemplo:
+name = 'Saullo' 
+limit = Você consegue botar um limite em sua consulta por exemplo 10 registros
+offset = Você consegue fazer com que a busca pule algumas linhas
+
+### USER / AUTH
+
+Para desenvolvimento você consegue utilizar o login admin e senha admin
+
+*/login* (POST) com o body:
+{
     "username": "admin",
     "password": "admin"
-}</code></pre>
-        <p><strong>Resposta:</strong> Retorna um token JWT que será utilizado para permissões de administrador.</p>
+}
+Vai retornar um token que é utilizado para fazer permissões de administrador.
 
-        <h3><span class="endpoint">/register</span> (POST)</h3>
-        <p>Registra um novo usuário.</p>
-        <p><strong>Body:</strong></p>
-        <pre><code>{
+*/register* (POST) com o body:
+{
     "username": "saulloreis",
     "password": "12345678"
-}</code></pre>
+}
+Você consegue registrar um usuário no sistema, lembrando apenas permissões de usuário apenas o usuário admin tem permissões de adm.
 
-        <h3><span class="endpoint">/user/delete/:idUser</span> (DELETE)</h3>
-        <p>Deleta um usuário pelo ID.</p>
-        <pre><code>DELETE /user/delete/1</code></pre>
+*/user/delete/:idUser* (DELETE):
+Você consegue deletar um usuário do sistema.
 
-        <h3><span class="endpoint">/user/update/:idUser</span> (PATCH)</h3>
-        <p>Atualiza as informações de um usuário.</p>
-        <p><strong>Body:</strong></p>
-        <pre><code>{
+*/user/update/:idUser* (PATCH) com o body:
+{   
     "username": "ADS",
-    "password": "1234"
-}</code></pre>
+    "password": "1234" 
+}
+Você consegue atualizar um usuário.
 
-        <h3><span class="endpoint">/user/get</span> (GET)</h3>
-        <p>Busca todos os usuários. Você pode usar os parâmetros <code>q</code>, <code>limit</code> e <code>offset</code>.</p>
+*/user/get* (GET):
+Você consegue fazer buscas de todos os usuários podendo utilizar q, limit e offset 
+campos:
+    id_user,
+    username
 
-        <h3><span class="endpoint">/user/get/:idUser</span> (GET)</h3>
-        <p>Busca um usuário específico pelo ID.</p>
-        <pre><code>GET /user/get/1</code></pre>
-    </div>
+*/user/get/idUser* (GET):
+Busca individual de um usuário.
 
-    <div class="section">
-        <h2>Gerenciamento de Pessoas</h2>
+## PERSON
 
-        <h3><span class="endpoint">/persons/create</span> (POST)</h3>
-        <p>Cria um novo registro de pessoa.</p>
-        <p><strong>Body:</strong></p>
-        <pre><code>{
+*/persons/create* (POST):
+Cria uma pessoa body:
+{
     "name": "Saullo Reis",
     "birth_date": "2001-01-01",
     "rg": "12.345.678-9",
@@ -174,46 +92,48 @@
         "cpf": "123.456.789-09",
         "cell_phone": "98765-4321"
     }
-}</code></pre>
+}
 
-        <h3><span class="endpoint">/persons/delete/:idPerson</span> (DELETE)</h3>
-        <p>Marca uma pessoa como inativa, sem removê-la do banco de dados.</p>
-        <pre><code>DELETE /persons/delete/1</code></pre>
+*/persons/delete/idPerson* (DELETE):
+Deleta uma pessoa pelo seu ID ( Ela não é excluida do banco apenas fica inativa )
 
-        <h3><span class="endpoint">/persons/update</span> (PATCH)</h3>
-        <p>Atualiza o registro de uma pessoa. O CPF é obrigatório e usado para identificação.</p>
-        <p><strong>Body:</strong> Mesmo formato do body de criação.</p>
+*/persons/update* (PATCH): 
+Com o mesmo body de criação OBS: CPF é utilizado para identificação ou seja obrigatório no body.
 
-        <h3><span class="endpoint">/persons/get/:idPerson</span> (GET)</h3>
-        <p>Busca uma pessoa específica pelo ID.</p>
-        <pre><code>GET /persons/get/1</code></pre>
+*/persons/get/:idPerson* (GET):
+Você busca individualmente uma pessoa pelo seu ID.
 
-        <h3><span class="endpoint">/persons/get</span> (GET)</h3>
-        <p>Busca várias pessoas, suportando os parâmetros <code>q</code>, <code>limit</code>, e <code>offset</code>.</p>
+*/persons/get* (GET): 
+Você busca várias pessoas. É possivel utilizar o q, limit e offset.
+Os nomes dos campos são iguais ao body e se for fazer uma condição para uma pessoa utilize por exemplo: person.name e para uma pessoa responsável: rperson.name
 
-        <h3><span class="endpoint">/persons/active/:idPerson</span> (POST)</h3>
-        <p>Ativa o registro de uma pessoa que estava desativada.</p>
-        <pre><code>POST /persons/active/1</code></pre>
-    </div>
+*/persons/active/idPerson* (POST):
+Você ativa uma pessoa que estava desativada.
 
-    <div class="section">
-        <h2>Gerenciamento de Atividades</h2>
+## Activity
 
-        <h3><span class="endpoint">/activityList/create</span> (POST)</h3>
-        <p>Cria uma nova atividade.</p>
+*/activityList/create* (POST):
+Você cria uma linha na lista de atividades.
 
-        <h3><span class="endpoint">/activityList/delete/:idActivityList</span> (DELETE)</h3>
-        <p>Deleta uma atividade.</p>
+*/activityList/delete/idActivityList* (DELETE):
+Você deleta uma atividade.
 
-        <h3><span class="endpoint">/activityList/update</span> (PATCH)</h3>
-        <p>Atualiza uma atividade.</p>
+*/activityList/get* (GET):
+Você busca a lista de atividades. É possivel utilizar o q, limit e offset.
 
-        <h3><span class="endpoint">/activityList/get</span> (GET)</h3>
-        <p>Busca todas as atividades.</p>
+*/activities/action/link* (POST)
+Você consegue linkar uma atividade a uma pessoa body:
+{
+    "id_person": 1,
+    "id_period": 1,
+    "id_activity": 3,
+    "hour_start": "18:00",
+    "hour_end": "20:00"
+}
 
-        <h3><span class="endpoint">/activityList/get/:idActivityList</span> (GET)</h3>
-        <p>Busca uma atividade específica pelo ID.</p>
-    </div>
+*/activities/action/link/delete/1* (DELETE)
+Você consegue retirar uma atividade de uma pessoa.
 
-</div>
+*/activities/getAll/:idPerson* (GET)
+Você consegue listar as atividade de uma pessoa. Não é possivel utilizar o q, limit e offset.
 
