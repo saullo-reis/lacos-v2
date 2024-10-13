@@ -56,5 +56,6 @@ func main() {
 	r.GET("/activityList/get", auth.AuthMiddleware(), activity.GetAllActivities)
 	r.POST("/activities/action/link", auth.AuthMiddleware(), activity.LinkActivity)
 	r.DELETE("/activities/action/link/delete/:idActivities", auth.AuthMiddleware(), activity.DeleteLink)
+	r.GET("/activities/getAll/:idPerson", auth.AuthMiddleware(), activity.GetAllActivitiesByPerson)
 	r.Run()
 }
