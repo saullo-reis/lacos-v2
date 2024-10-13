@@ -9,10 +9,12 @@ Necessita de ter o docker e o docker-compose baixado em sua máquina.
 - docker-compose up --build
 - docker-compose down
 Faça uma requisição para o http://localhost:8080/ping se retornar:
+```
 {
     "message": "pong",
     "status": 200
 }
+```
 
 Está tudo certo e já pode utilizar a API
 
@@ -29,43 +31,50 @@ offset = Você consegue fazer com que a busca pule algumas linhas
 
 Para desenvolvimento você consegue utilizar o login admin e senha admin
 
-*/login* (POST) com o body:
+<strong>/login</strong> (POST) com o body:
+```
 {
     "username": "admin",
     "password": "admin"
 }
+```
 Vai retornar um token que é utilizado para fazer permissões de administrador.
 
-*/register* (POST) com o body:
+<strong>/register</strong> (POST) com o body:
+```
 {
     "username": "saulloreis",
     "password": "12345678"
 }
+```
 Você consegue registrar um usuário no sistema, lembrando apenas permissões de usuário apenas o usuário admin tem permissões de adm.
 
-*/user/delete/:idUser* (DELETE):
+<strong>/user/delete/:idUser</strong> (DELETE):
 Você consegue deletar um usuário do sistema.
 
-*/user/update/:idUser* (PATCH) com o body:
+<strong>/user/update/:idUser</strong> (PATCH) com o body:
+```
 {   
     "username": "ADS",
     "password": "1234" 
 }
+```
 Você consegue atualizar um usuário.
 
-*/user/get* (GET):
+<strong>/user/get</strong> (GET):
 Você consegue fazer buscas de todos os usuários podendo utilizar q, limit e offset 
 campos:
     id_user,
     username
 
-*/user/get/idUser* (GET):
+<strong>/user/get/idUser</strong> (GET):
 Busca individual de um usuário.
 
 ## PERSON
 
-*/persons/create* (POST):
+<strong>/persons/create</strong> (POST):
 Cria uma pessoa body:
+```
 {
     "name": "Saullo Reis",
     "birth_date": "2001-01-01",
@@ -93,36 +102,38 @@ Cria uma pessoa body:
         "cell_phone": "98765-4321"
     }
 }
+```
 
-*/persons/delete/idPerson* (DELETE):
+<strong>/persons/delete/idPerson</strong> (DELETE):
 Deleta uma pessoa pelo seu ID ( Ela não é excluida do banco apenas fica inativa )
 
-*/persons/update* (PATCH): 
+<strong>/persons/update</strong> (PATCH): 
 Com o mesmo body de criação OBS: CPF é utilizado para identificação ou seja obrigatório no body.
 
-*/persons/get/:idPerson* (GET):
+<strong>/persons/get/:idPerson</strong> (GET):
 Você busca individualmente uma pessoa pelo seu ID.
 
-*/persons/get* (GET): 
+<strong>/persons/get</strong> (GET): 
 Você busca várias pessoas. É possivel utilizar o q, limit e offset.
 Os nomes dos campos são iguais ao body e se for fazer uma condição para uma pessoa utilize por exemplo: person.name e para uma pessoa responsável: rperson.name
 
-*/persons/active/idPerson* (POST):
+<strong>/persons/active/idPerson</strong> (POST):
 Você ativa uma pessoa que estava desativada.
 
 ## Activity
 
-*/activityList/create* (POST):
+<strong>/activityList/create</strong> (POST):
 Você cria uma linha na lista de atividades.
 
-*/activityList/delete/idActivityList* (DELETE):
+<strong>/activityList/delete/idActivityList</strong> (DELETE):
 Você deleta uma atividade.
 
-*/activityList/get* (GET):
+<strong>/activityList/get</strong> (GET):
 Você busca a lista de atividades. É possivel utilizar o q, limit e offset.
 
-*/activities/action/link* (POST)
+<strong>/activities/action/link</strong> (POST)
 Você consegue linkar uma atividade a uma pessoa body:
+```
 {
     "id_person": 1,
     "id_period": 1,
@@ -130,10 +141,11 @@ Você consegue linkar uma atividade a uma pessoa body:
     "hour_start": "18:00",
     "hour_end": "20:00"
 }
+```
 
-*/activities/action/link/delete/1* (DELETE)
+<strong>/activities/action/link/delete/1</strong> (DELETE)
 Você consegue retirar uma atividade de uma pessoa.
 
-*/activities/getAll/:idPerson* (GET)
+<strong>/activities/getAll/:idPerson</strong> (GET)
 Você consegue listar as atividade de uma pessoa. Não é possivel utilizar o q, limit e offset.
 
