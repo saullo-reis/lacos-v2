@@ -40,13 +40,14 @@ func GetAllActivitiesByPerson(c *gin.Context){
 		return
 	}
 
-	query := `SELECT A.id_activity, A.id_period,A.id_person,A.id_activities,B.name,
-							C.name,
-							A.hour_start,
-							A.hour_end
+	query := `SELECT A.id_activity, B.id_period,A.id_person,A.id_activities,
+						B.name,
+						C.name,
+						B.hour_start,
+						B.hour_end
 						FROM activities A
 						JOIN activity_list B ON A.id_activity = B.id_activity 
-						JOIN period C ON A.id_period = C.id_period
+						JOIN period C ON B.id_period = C.id_period
 						WHERE A.id_person = $1`
 	rows, err := db.Query(query, idPerson)
 	if err != nil {

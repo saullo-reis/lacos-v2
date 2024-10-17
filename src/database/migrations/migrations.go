@@ -56,16 +56,16 @@ func CreateTables() {
 
 	CREATE TABLE IF NOT EXISTS activity_list (
 		id_activity SERIAL PRIMARY KEY,
-		name VARCHAR(100) NOT NULL
+		name VARCHAR(100) NOT NULL,
+		hour_start VARCHAR(50) NOT NULL,
+		hour_end VARCHAR(50) NOT NULL,
+		id_period INT REFERENCES period(id_period)
 	);
 
 	CREATE TABLE IF NOT EXISTS activities (
 		id_activities SERIAL PRIMARY KEY,
 		id_activity INT REFERENCES activity_list(id_activity),
-		id_person INT REFERENCES persons(id_person),
-		id_period INT REFERENCES period(id_period),
-		hour_start VARCHAR(50) NOT NULL,
-		hour_end VARCHAR(50) NOT NULL
+		id_person INT REFERENCES persons(id_person)
 	);
 
 	CREATE TABLE IF NOT EXISTS users(

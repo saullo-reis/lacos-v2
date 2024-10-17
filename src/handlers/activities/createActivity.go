@@ -2,6 +2,7 @@ package activity
 
 import (
 	"net/http"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 	database "lacosv2.com/src/database/config"
@@ -18,10 +19,21 @@ func CreateActivity(c *gin.Context) {
 		return
 	}
 
+	var motiveMandatory []string
 	if body.NameActivity == "" {
+		motiveMandatory = append(motiveMandatory, "Nome obrigatório")
+	}
+	if body.HourStart == "" {
+		motiveMandatory = append(motiveMandatory, "Horário de início obrigatório")
+	}
+	if body.HourEnd == "" {
+		motiveMandatory = append(motiveMandatory, "Horário de fim obrigatório")
+	}
+
+	if len(motiveMandatory) > 0 {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"status":  400,
-			"message": "Um nome é obrigatório",
+			"message": strings.Join(motiveMandatory, ", "),
 		})
 		return
 	}
@@ -36,7 +48,7 @@ func CreateActivity(c *gin.Context) {
 	}
 	defer db.Close()
 	
-	_, err = db.Exec("INSERT INTO activity_list(name) VALUES($1) ", body.NameActivity)
+	_, err = db.Exec("INSERT INTO activity_list(name, hour_start, hour_end, id_period) VALUES($1, $2, $3, $4) ", body.NameActivity, body.HourStart, body.HourEnd, body.IdPeriod)
 	if err != nil{
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"status": 500,

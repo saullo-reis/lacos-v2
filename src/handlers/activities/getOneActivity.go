@@ -20,10 +20,10 @@ func GetOneActivity(c *gin.Context){
 		return
 	} 
 
-	query := "SELECT activity.id_activity, activity.name FROM activity_list activity WHERE id_activity = $1"
+	query := "SELECT activity.id_activity, activity.name, activity.hour_start, activity.hour_end, activity.id_period, prd.name FROM activity_list activity JOIN period prd ON prd.id_period = activity.id_period WHERE id_activity = $1"
 	
 	var searchActivity structs.BodyResponse
-	err = db.QueryRow(query, idActivity).Scan(&searchActivity.IdActivity, &searchActivity.NameActivity)
+	err = db.QueryRow(query, idActivity).Scan(&searchActivity.IdActivity, &searchActivity.NameActivity, &searchActivity.HourStart, &searchActivity.HourEnd, &searchActivity.IdPeriod, &searchActivity.NamePeriod)
 
 	if err != nil {
 		if err == sql.ErrNoRows {

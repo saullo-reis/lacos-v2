@@ -46,24 +46,6 @@ func LinkActivity(c *gin.Context){
 		return
 	}
 
-	var existPeriod string
-	row = db.QueryRow("SELECT 'Y' FROM period WHERE id_period = $1", request.IdPeriod)
-	err = row.Scan(&existPeriod)
-	if err != nil{
-		if err == sql.ErrNoRows {
-			c.JSON(http.StatusBadRequest, gin.H{
-				"status": 400,
-				"message": "Período não existe",
-			})
-			return
-		}
-		c.JSON(http.StatusInternalServerError, gin.H{
-			"status": 500,
-			"message": "Error interno no servidor: "+err.Error(),
-		})
-		return
-	}
-
 	var existActivity string
 	row = db.QueryRow("SELECT 'Y' FROM activity_list WHERE id_activity = $1", request.IdActivity)
 	err = row.Scan(&existActivity)
@@ -82,7 +64,7 @@ func LinkActivity(c *gin.Context){
 		return
 	}
 
-	_, err = db.Exec("INSERT INTO activities(id_person, id_activity, id_period, hour_start, hour_end) VALUES($1, $2, $3, $4, $5)", request.IdPerson, request.IdActivity, request.IdPeriod, request.HourStart, request.HourEnd)
+	_, err = db.Exec("INSERT INTO activities(id_person, id_activity) VALUES($1, $2)", request.IdPerson, request.IdActivity)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"status": 500,

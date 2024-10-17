@@ -32,7 +32,7 @@ func GetAllActivities(c *gin.Context){
 		q = "2 = 2"
 	}
 
-	query := "SELECT id_activity, name FROM activity_list WHERE 1 = 1 AND "
+	query := "SELECT act.id_activity, act.name, act.hour_start, act.hour_end, act.id_period, prd.name FROM activity_list act JOIN period prd ON prd.id_period = act.id_period WHERE 1 = 1 AND "
 	query = query + " " + q + " "
 	query = query + addingLimit(limit) + " " + addingOffset(offset)
 	fmt.Println(query)
@@ -61,7 +61,7 @@ func GetAllActivities(c *gin.Context){
 
 	for rows.Next() {
 		var searchActivity structs.BodyResponse
-		err = rows.Scan(&searchActivity.IdActivity, &searchActivity.NameActivity)
+		err = rows.Scan(&searchActivity.IdActivity, &searchActivity.NameActivity, &searchActivity.HourStart, &searchActivity.HourEnd, &searchActivity.IdPeriod, &searchActivity.NamePeriod)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{
 				"status": 500,
