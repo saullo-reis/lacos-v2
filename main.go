@@ -11,6 +11,7 @@ import (
 	"lacosv2.com/src/handlers/auth"
 	"lacosv2.com/src/handlers/persons"
 	"lacosv2.com/src/handlers/user"
+	"github.com/gin-contrib/cors"
 )
 
 func init() {
@@ -22,6 +23,15 @@ func init() {
 
 func main() {
 	r := gin.Default()
+
+	r.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"*"}, 
+		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH", "DELETE"}, 
+		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+	}))
+
 	migrations.CreateTables()
 
 	r.GET("/ping", func(c *gin.Context) {
