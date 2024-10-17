@@ -27,6 +27,7 @@ func CreateTables() {
     home_phone VARCHAR(15),
     cell_phone VARCHAR(15),
     contact_phone VARCHAR(15),
+	created_date timestamp not null default CURRENT_TIMESTAMP,
     email VARCHAR(255),
     current_age INT,
 	active VARCHAR(1)

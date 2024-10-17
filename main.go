@@ -58,6 +58,7 @@ func main() {
 	r.PATCH("/persons/update", auth.AuthMiddleware(), persons.UpdatePersons)
 	r.DELETE("/persons/delete/:idPerson", auth.AuthMiddleware(), persons.DeletePerson)
 	r.POST("/persons/active/:idPerson", auth.AuthMiddleware(), persons.ActivePerson)
+	r.GET("/persons/get/monthRegistered", auth.AuthMiddleware(), persons.GetPersonsRegisteredPerMonth)
 
 	//ACTIVITIES
 	r.POST("/activityList/create", auth.AuthMiddleware(), activity.CreateActivity)
