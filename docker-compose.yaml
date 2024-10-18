@@ -8,6 +8,8 @@ services:
       POSTGRES_DB: ${DBNAME}
     volumes:
       - db_data:/var/lib/postgresql/data
+    networks:
+      - app-network
 
   api:
     build:
@@ -24,5 +26,12 @@ services:
       DBNAME: ${DBNAME}
     depends_on:
       - postgres
+    networks:
+      - app-network
+
 volumes:
   db_data:
+
+networks:
+  app-network:
+    driver: bridge
