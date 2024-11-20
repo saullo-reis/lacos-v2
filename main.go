@@ -14,12 +14,12 @@ import (
 	"github.com/gin-contrib/cors"
 )
 
-// func init() {
-// 	err := godotenv.Load("./.env")
-// 	if err != nil {
-// 		log.Fatalf("Error ao carregar variáveis de ambiente " + err.Error())
-// 	}
-// }
+func init() {
+	err := godotenv.Load("./.env")
+	if err != nil {
+		log.Fatalf("Error ao carregar variáveis de ambiente " + err.Error())
+	}
+}
 
 func main() {
 	r := gin.Default()
