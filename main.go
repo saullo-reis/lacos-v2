@@ -1,11 +1,11 @@
 package main
 
 import (
-	"log"
+	// "log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
+	// "github.com/joho/godotenv"
 	"lacosv2.com/src/database/migrations"
 	activity "lacosv2.com/src/handlers/activities"
 	"lacosv2.com/src/handlers/auth"
