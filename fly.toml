@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for lacos-v2-4ubelg on 2025-01-15T22:58:00Z
+# fly.toml app configuration file generated for lacos-v2-dkrwiq on 2025-01-15T23:08:46Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'lacos-v2-4ubelg'
+app = 'lacos-v2-dkrwiq'
 primary_region = 'gru'
 
 [build]
