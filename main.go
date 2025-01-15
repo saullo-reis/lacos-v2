@@ -1,11 +1,11 @@
 package main
 
 import (
-	// "log"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	// "github.com/joho/godotenv"
+	"github.com/joho/godotenv"
 	"lacosv2.com/src/database/migrations"
 	activity "lacosv2.com/src/handlers/activities"
 	"lacosv2.com/src/handlers/auth"
@@ -14,12 +14,12 @@ import (
 	"github.com/gin-contrib/cors"
 )
 
-// func init() {
-// 	err := godotenv.Load("./.env")
-// 	if err != nil {
-// 		log.Fatalf("Error ao carregar variáveis de ambiente " + err.Error())
-// 	}
-// }
+func init() {
+	err := godotenv.Load("./.env")
+	if err != nil {
+		log.Fatalf("Error ao carregar variáveis de ambiente " + err.Error())
+	}
+}
 
 func main() {
 	r := gin.Default()
