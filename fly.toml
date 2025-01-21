@@ -4,15 +4,6 @@ primary_region = "gig"
 [build]
 dockerfile = "Dockerfile"
 
-[env]
-DBNAME = "lacos"
-HOSTPOSTGRES = "postgres-app-data-base-lacos.flycast"
-JWTKEYSECRET = "KEYSECRET"
-PASSWORDPOSTGRES = "tqAzEo9gVr8Jlxf"
-PORTPOSTGRES = "5432"
-POSTGRESDRIVER = "postgres"
-USERPOSTGRES = "postgres"
-
 [http_service]
 auto_start_machines = true
 auto_stop_machines = true
