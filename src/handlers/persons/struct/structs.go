@@ -36,11 +36,11 @@ type PersonJSON struct {
 type SearchFieldsResponsablePerson struct {
 	IDResponsible sql.NullInt64  `json:"id_responsable"`
 	IDPerson      sql.NullInt64  `json:"id_person"`
-	Name          sql.NullString `json:"name"`
+	Name          sql.NullString `json:"responsable_name"`
 	Relationship  sql.NullString `json:"relationship"`
-	RG            sql.NullString `json:"rg"`
-	CPF           sql.NullString `json:"cpf"`
-	CellPhone     sql.NullString `json:"cell_phone"`
+	RG            sql.NullString `json:"responsable_rg"`
+	CPF           sql.NullString `json:"responsable_cpf"`
+	CellPhone     sql.NullString `json:"responsable_cell_phone"`
 }
 
 type SearchFieldsPerson struct {
@@ -76,17 +76,17 @@ type Params struct {
 }
 
 type ResponseResponsiblePerson struct {
-	IDPerson     int64    `json:"id_person"`
-	IDResponsible int64 `json:"id_responsible"`
-	Name         string `json:"name"`
-	Relationship string `json:"relationship"`
-	RG           string `json:"rg"`
-	CPF          string `json:"cpf"`
-	CellPhone    string `json:"cell_phone"`
+	IDPerson      int64  `json:"id_person"`
+	IDResponsible int64  `json:"id_responsible"`
+	Name          string `json:"responsable_name"`
+	Relationship  string `json:"relationship"`
+	RG            string `json:"responsable_rg"`
+	CPF           string `json:"responsable_cpf"`
+	CellPhone     string `json:"responsable_cell_phone"`
 }
 
 type Response struct {
-	IDPerson int64 `json:"id_person"`
+	IDPerson          int64                     `json:"id_person"`
 	Name              string                    `json:"name"`
 	BirthDate         string                    `json:"birth_date"`
 	RG                string                    `json:"rg"`
@@ -104,7 +104,7 @@ type Response struct {
 	CellPhone         string                    `json:"cell_phone"`
 	ContactPhone      string                    `json:"contact_phone"`
 	Email             string                    `json:"email"`
-	CurrentAge        int64                      `json:"current_age"`
+	CurrentAge        int64                     `json:"current_age"`
 	Active            string                    `json:"active"`
 	ResponsiblePerson ResponseResponsiblePerson `json:"responsible_person"`
 }

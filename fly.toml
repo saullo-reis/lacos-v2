@@ -1,24 +1,25 @@
-# fly.toml app configuration file generated for lacos-v2-dkrwiq on 2025-01-15T23:08:46Z
-#
-# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
-#
-
-app = 'lacos-v2-dkrwiq'
-primary_region = 'gru'
+app = "lacos-v2"
+primary_region = "gig"
 
 [build]
 dockerfile = "Dockerfile"
 
+[env]
+DBNAME = "lacos"
+HOSTPOSTGRES = "postgres-app-data-base-lacos.flycast"
+JWTKEYSECRET = "KEYSECRET"
+PASSWORDPOSTGRES = "tqAzEo9gVr8Jlxf"
+PORTPOSTGRES = "5432"
+POSTGRESDRIVER = "postgres"
+USERPOSTGRES = "postgres"
+
 [http_service]
-  internal_port = 8080
-  force_https = true
-  auto_stop_machines = 'stop'
-  auto_start_machines = true
-  min_machines_running = 0
-  processes = ['app']
+auto_start_machines = true
+auto_stop_machines = true
+force_https = true
+internal_port = 8_080
+min_machines_running = 0
+processes = [ "app" ]
 
 [[vm]]
-  memory = '225mb'
-  cpu_kind = 'shared'
-  cpus = 1
-  memory_mb = 225
+size = "shared-cpu-1x"
