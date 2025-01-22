@@ -19,15 +19,17 @@ services:
       - 8080:8080
     environment:
       USERPOSTGRES: ${USERPOSTGRES}
+      PASSWORDPOSTGRES: ${PASSWORDPOSTGRES}
+      DBNAME: ${DBNAME}
       POSTGRESDRIVER: ${POSTGRESDRIVER}
       HOSTPOSTGRES: ${HOSTPOSTGRES}
       PORTPOSTGRES: ${PORTPOSTGRES}
-      PASSWORDPOSTGRES: ${PASSWORDPOSTGRES}
-      DBNAME: ${DBNAME}
+      JWTKEYSECRET: ${JWTKEYSECRET}
     depends_on:
       - postgres
     networks:
       - app-network
+
 
 volumes:
   db_data:

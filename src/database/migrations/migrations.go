@@ -73,6 +73,13 @@ func CreateTables() {
 		username VARCHAR(100) NOT NULL,
 		password VARCHAR(100) NOT NULL
 	);
+
+	INSERT INTO users (username, password)
+	SELECT 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'
+	WHERE NOT EXISTS (
+		SELECT 1 FROM users WHERE username = 'admin'
+	);
+
 	`
 	fmt.Println(dbconfig.DataSourceName)
 	db, err := dbconfig.ConnectDB()
