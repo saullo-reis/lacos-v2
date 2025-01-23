@@ -6,11 +6,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"os"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 )
 
 func ChargeData(c *gin.Context) {
@@ -55,8 +57,15 @@ func ChargeData(c *gin.Context) {
 		})
 		return
 	}
+	err = godotenv.Load(".env")
+	if err != nil {
+		log.Fatalf("Error ao carregar variáveis de ambiente na configuração do banco "+err.Error())
+	}
 
-	apiURL := "http://localhost:8080/persons/create"
+	environment := os.Getenv("ENVIRONMENT")
+	apiURL := environment + "/persons/create"
+
+	fmt.Println(apiURL)
 	errors := []string{}
 	for i, record := range records {
 		if i == 0 {
