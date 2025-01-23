@@ -3,8 +3,9 @@ package bulkData
 import (
 	"bytes"
 	"encoding/csv"
+	"fmt"
 	"net/http"
-	"encoding/base64"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -57,10 +58,7 @@ func SendCsv(c *gin.Context) {
 		})
 		return
 	}
-
-	csvBase64 := base64.StdEncoding.EncodeToString(buf.Bytes())
-	c.JSON(http.StatusOK, gin.H{
-		"file": csvBase64,
-	})
+	fmt.Println(header)
+	c.Data(http.StatusOK, "text/csv", buf.Bytes())
 
 }
