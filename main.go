@@ -4,15 +4,16 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"lacosv2.com/src/database/migrations"
 	activity "lacosv2.com/src/handlers/activities"
-	"lacosv2.com/src/handlers/bulkData"
+	period "lacosv2.com/src/handlers/activities/periods"
 	"lacosv2.com/src/handlers/auth"
+	"lacosv2.com/src/handlers/bulkData"
 	"lacosv2.com/src/handlers/persons"
 	"lacosv2.com/src/handlers/user"
-	"github.com/gin-contrib/cors"
 )
 
 func init() {
@@ -41,6 +42,9 @@ func main() {
 			"message": "pong",
 		})
 	})
+	//PERIOD
+	r.GET("/periodsLOV", period.GetPeriods)
+
 	//BULKDATA
 	r.GET("/bulkData/downloadSampleArchive", bulkData.SendCsv)
 	r.POST("/bulkData/chargeData", auth.AuthMiddleware(), bulkData.ChargeData)
