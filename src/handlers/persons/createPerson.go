@@ -84,7 +84,7 @@ func CreatePerson(c *gin.Context) {
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"status_code": 500,
-			"message":     "Erro ao inserir a pessoa no banco de dados",
+			"message":     "Erro ao inserir a pessoa no banco de dados: " + err.Error(),
 		})
 		return
 	}

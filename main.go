@@ -8,6 +8,7 @@ import (
 	"github.com/joho/godotenv"
 	"lacosv2.com/src/database/migrations"
 	activity "lacosv2.com/src/handlers/activities"
+	"lacosv2.com/src/handlers/bulkData"
 	"lacosv2.com/src/handlers/auth"
 	"lacosv2.com/src/handlers/persons"
 	"lacosv2.com/src/handlers/user"
@@ -40,6 +41,9 @@ func main() {
 			"message": "pong",
 		})
 	})
+	//BULKDATA
+	r.GET("/bulkData/downloadSampleArchive", bulkData.SendCsv)
+	r.POST("/bulkData/chargeData", auth.AuthMiddleware(), bulkData.ChargeData)
 
 	//AUTH
 	r.POST("/login", auth.Login)
