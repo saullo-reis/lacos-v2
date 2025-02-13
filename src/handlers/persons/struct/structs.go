@@ -4,11 +4,11 @@ import "database/sql"
 
 type ResponsiblePersonJSON struct {
 	IDPerson     int    `json:"id_person"`
-	Name         string `json:"name"`
+	Name         string `json:"responsable_name"`
 	Relationship string `json:"relationship"`
-	RG           string `json:"rg"`
-	CPF          string `json:"cpf"`
-	CellPhone    string `json:"cell_phone"`
+	RG           string `json:"responsable_rg"`
+	CPF          string `json:"responsable_cpf"`
+	CellPhone    string `json:"responsable_cell_phone"`
 }
 
 type PersonJSON struct {
